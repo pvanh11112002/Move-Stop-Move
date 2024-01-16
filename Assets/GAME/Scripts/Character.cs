@@ -6,13 +6,14 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer;
-    public Vector3 dir;
+    [HideInInspector] public Vector3 dir;
     [HideInInspector] public int amountBullet = 0;
-    public float speed = 2f;   
-    public float radius = 5f;
-    public string enemyLayer = "Enemy";
-    public bool isMoving = false;
-    public bool hasEnemy = false;
+    [HideInInspector] public float speed = 2f;
+    [HideInInspector] public float radius = 5f;
+    [HideInInspector] public string enemyLayer = "Enemy";
+    [HideInInspector] public bool isMoving = false;
+    [HideInInspector] public bool hasEnemy = false;
+    public int hP = 1;
 
     protected virtual void Start()
     {

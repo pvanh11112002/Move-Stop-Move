@@ -6,8 +6,7 @@ using UnityEngine;
 public class Player : Character
 {
     public FloatingJoystick variableJoystick;
-    
-    
+
     void Update()
     {
         Move();
@@ -28,7 +27,8 @@ public class Player : Character
                 isMoving = true;               
                 transform.position = CheckGround(nextPoint);
                 amountBullet = 1;
-                Debug.Log("Amount Bullet: " + amountBullet);
+                hP = 1;
+                //Debug.Log("Amount Bullet: " + amountBullet);
             }
         }
         else
@@ -43,9 +43,10 @@ public class Player : Character
     {
         if (isMoving == false && amountBullet > 0 && hasEnemy == true)
         {
-            Debug.Log("Is Shooting");
+            //Debug.Log("Is Shooting");
             amountBullet = 0;
-            Debug.Log("Amount Bullet: " + amountBullet);
+            hP = 0;
+            //Debug.Log("Amount Bullet: " + amountBullet);
         }
     }
     public bool DetectEnemy(Vector3 center, float radius)
