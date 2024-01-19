@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
             return instance;
         }
     }
-    [HideInInspector] public int numberBot = 10;
+    public int numberBot = 10;
     public GameObject botPrefabs;
     public float rangeX;
     public float rangeZ;

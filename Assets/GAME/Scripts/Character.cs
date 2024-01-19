@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayer;
     [HideInInspector] public Vector3 dir;
-    [HideInInspector] public int amountBullet = 0;
+    public int amountBullet = 0;
     [HideInInspector] public float speed = 2f;
     [HideInInspector] public float radius = 5f;
     [HideInInspector] public string enemyLayer = "Enemy";

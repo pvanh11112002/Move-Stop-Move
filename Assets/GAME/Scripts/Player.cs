@@ -6,8 +6,7 @@ using UnityEngine;
 public class Player : Character
 {
     public FloatingJoystick variableJoystick;
-
-    void Update()
+    void FixedUpdate()
     {
         Move();
         hasEnemy = DetectEnemy(transform.position, radius);
@@ -18,7 +17,7 @@ public class Player : Character
         float horizon = variableJoystick.Horizontal;
         float vertical = variableJoystick.Vertical;
         dir = new Vector3(horizon * speed, 0, vertical * speed);
-        //transform.rotation = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.LookRotation(dir);
         Vector3 nextPoint = dir * speed * Time.deltaTime + transform.position;
         if (dir != new Vector3(0, 0, 0))
         {
@@ -45,7 +44,7 @@ public class Player : Character
         {
             //Debug.Log("Is Shooting");
             amountBullet = 0;
-            hP = 0;
+            //hP = 0;
             //Debug.Log("Amount Bullet: " + amountBullet);
         }
     }
@@ -64,4 +63,5 @@ public class Player : Character
             return false;
         }
     }
+    
 }
