@@ -4,26 +4,23 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ThrowWeapon : Weapon
+public class Boomerang : Weapon
 {
-    public GameObject player;
-    // Vị trí khởi đầu của boomerang    
-    // Check vũ khí có đang bị ném đi hoặc không
-    public bool thrown;
-
-    // Lấy thằng con của nó làm vũ khí để ném
-    public Transform boomerang;
-
-
-    // Check xem có đang quay không
-    public bool rotateOnOff;
-    //Kiểm tra xem boomerang đã quay về vị trí ban đầu hay chưa
-    public bool startRotationPosition;
+    public GameObject player;       
+    public bool thrown;                                 // Check vũ khí có đang bị ném đi hoặc không
+    public Transform boomerang;                         // Lấy thằng con của nó làm vũ khí để ném
+    public bool rotateOnOff;                            // Check xem có đang quay không
+    public bool startRotationPosition;                  //Kiểm tra xem boomerang đã quay về vị trí ban đầu hay chưa
     private void Start()
     {
-        rotateOnOff = false;
-        thrown = false;        
-        startRotationPosition = false;
+        OnInit();
+    }
+    public override void OnInit()
+    {
+        player = GameObject.Find("Player");
+        rotateOnOff = false;                            // Không quay
+        thrown = false;                                 // chưa bị ném đi
+        startRotationPosition = false;                  // chưa quay trở về vị trí ban đầu
     }
     private void Update()
     {
@@ -58,11 +55,11 @@ public class ThrowWeapon : Weapon
             {
                 thrown = false;
             }
-        }        if (Input.GetKeyDown(KeyCode.Space) && thrown == false && transform.position == startPos)
+        }        if (/*Input.GetKeyDown(KeyCode.Space) && */thrown == false && transform.position == startPos)
         {
             startRotationPosition = false;
             rotateOnOff = true;
             thrown = true;
-        }
+        }
     }
 }

@@ -1,27 +1,23 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Axe : Weapon
 {    
-    private Vector3 newPos;
-    // Start is called before the first frame update
     void Start()
     {
         OnInit();
     }
     private void Update()
     {
-        if (transform.position.z >= distance)
-        {
-            OnDespawn();
-        }
-        transform.Rotate(new Vector3(0, 0, -(rotateSpeed * Time.deltaTime)), Space.Self);
-        transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
-            
+        // Điều hướng di chuyển 
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed * Time.deltaTime);
+        //Invoke("OnDespawn()", 2.5f);
+
     }
-    public void OnInit()
+    public override void OnInit()
     {
+        //Cái này cũng chưa chạy
         newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + distance);
         startPos = transform.position;       
     }

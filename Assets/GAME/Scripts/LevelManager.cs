@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public GameObject botPrefabs;
     public float rangeX;
     public float rangeZ;
+    //public TextMeshPro text;
     // Có thể dùng cả cách thủ công như thế này, hoặc viết class LevelManager này kế thừa lớp Singleton<T> đã viết
     // Start is called before the first frame update
     void Start()

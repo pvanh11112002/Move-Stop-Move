@@ -37,6 +37,10 @@ public class Bot : Character
     {
         if (currentState != null)
         {
+            if(hP <= 0)
+            {
+                Destroy(gameObject);
+            }    
             currentState.OnExcute(this);
         }
     }

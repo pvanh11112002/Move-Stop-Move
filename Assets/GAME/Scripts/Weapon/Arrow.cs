@@ -1,26 +1,17 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Arrow : Weapon
 {
-    private Vector3 newPos;
-    // Start is called before the first frame update
-    private void Start()
-    {
-        OnInit();
-    }
     private void Update()
     {
-        if (transform.position.z >= distance)
-        {
-            OnDespawn();
-        }
-        transform.position = Vector3.MoveTowards(transform.position, newPos, speed * Time.deltaTime);
-
+        // Điều hướng di chuyển của mũi tên
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed * Time.deltaTime);       
     }
-    public void OnInit()
+    public override void OnInit()
     {
+        // Chưa dùng để làm gì cả
         startPos = transform.position;
         newPos = new Vector3(startPos.x, startPos.y, startPos.z + distance);
         

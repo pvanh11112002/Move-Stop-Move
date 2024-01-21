@@ -14,6 +14,9 @@ public class Character : MonoBehaviour
     [HideInInspector] public bool isMoving = false;
     [HideInInspector] public bool hasEnemy = false;
     public int hP = 1;
+    public Weapon[] weaponPrefabs;
+    public int indexOfWeapon = 0;
+    public int killCount = 0;
 
     protected virtual void Start()
     {

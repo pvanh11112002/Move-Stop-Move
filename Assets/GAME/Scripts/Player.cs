@@ -1,23 +1,57 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Player : Character
 {
     public FloatingJoystick variableJoystick;
-    void FixedUpdate()
+    public Transform throwPoint;
+    public GameObject throwPointObject;
+    public GameObject skin;
+    void Update()
     {
+        throwPointObject.transform.rotation = transform.rotation;
+        ChooseNextWeapon();        
         Move();
-        hasEnemy = DetectEnemy(transform.position, radius);
-        Shoot(hasEnemy);
+        Shoot(DetectEnemy(transform.position, radius));
+
+    }
+    private int ChooseNextWeapon()
+    {
+        // Nhấn để chọn loại vũi khí cho đòn đánh tiếp theo
+        // A: Arrow = Mũi tên
+        // X: Axec = Rìu
+        // B: Boomerang
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            indexOfWeapon = 0;
+            Debug.Log(indexOfWeapon);
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            indexOfWeapon = 1;
+            Debug.Log(indexOfWeapon);
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            indexOfWeapon = 2;
+            Debug.Log(indexOfWeapon);
+        }
+        return indexOfWeapon;
     }
     private void Move()
     {
         float horizon = variableJoystick.Horizontal;
         float vertical = variableJoystick.Vertical;
+        if (Mathf.Abs(horizon) + Mathf.Abs(vertical) < 0.01f)
+        {
+            isMoving = false;
+            return;
+        }
         dir = new Vector3(horizon * speed, 0, vertical * speed);
-        transform.rotation = Quaternion.LookRotation(dir);
+        transform.forward = dir;
         Vector3 nextPoint = dir * speed * Time.deltaTime + transform.position;
         if (dir != new Vector3(0, 0, 0))
         {
@@ -27,40 +61,47 @@ public class Player : Character
                 transform.position = CheckGround(nextPoint);
                 amountBullet = 1;
                 hP = 1;
-                //Debug.Log("Amount Bullet: " + amountBullet);
             }
         }
         else
         {
-            //Draft
-            //amountBullet = 0;
             isMoving = false;
         }
     }
+    private void UpSize()
+    {
+        Debug.Log("UpSize");
+        transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
+    }    
 
-    private void Shoot(bool hasEnemy)
+    private void Shoot(Bot hasEnemy)
     {
         if (isMoving == false && amountBullet > 0 && hasEnemy == true)
         {
-            //Debug.Log("Is Shooting");
+            transform.LookAt(hasEnemy.transform);
+            
+            var bullet = Instantiate(weaponPrefabs[indexOfWeapon]);
+            //var bullet2 = ObjectPoolManager.SpawnObject(weaponPrefabs[indexOfWeapon], new Vector3(0, -50, 0), throwPoint.transform.rotation);
+            bullet.transform.position = throwPoint.position;
+            bullet.transform.forward = transform.forward;
+            bullet.OnInit();            
+            killCount++;
             amountBullet = 0;
-            //hP = 0;
-            //Debug.Log("Amount Bullet: " + amountBullet);
+            Invoke("UpSize", 1f);
         }
     }
-    public bool DetectEnemy(Vector3 center, float radius)
+    public Bot DetectEnemy(Vector3 center, float radius)
     {
         Debug.DrawLine(center, new Vector3(center.x + radius, center.y, center.z), Color.blue);
         LayerMask interactiveLayerMask = LayerMask.GetMask(enemyLayer);
         Collider[] hitColliders = Physics.OverlapSphere(center, radius, interactiveLayerMask);
         if (hitColliders.Length > 0)
         {
-            //Debug.Log("Have ene");
-            return true;
+            return hitColliders[0].GetComponent<Bot>();
         }
         else
         {
-            return false;
+            return null;
         }
     }
     

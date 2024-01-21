@@ -5,23 +5,31 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    //Rcm dùng transform.position
-    //public Rigidbody rb;
     public float speed;
     public float distance;
     public Vector3 startPos;
     public float throwSpeed;
     public float rotateSpeed = 500f;
-    public void OnDespawn()
+    public Vector3 newPos;
+
+    public virtual void OnInit()
+    {
+        
+    }
+    public virtual void OnDespawn()
     {
         Destroy(gameObject);
     }
     public void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Enemy")
-        {
-            collision.enabled = false;
+        { 
+            collision.gameObject.SetActive(false);
             OnDespawn();
+        }
+        else
+        {
+            Invoke("OnDespawn()", 2.5f);
         }
     }    
 }
