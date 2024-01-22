@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
-
 public class Player : Character
 {
     public FloatingJoystick variableJoystick;
     public Transform throwPoint;
     public GameObject throwPointObject;
     public GameObject skin;
+    public bool hitEnemy = false;
+    public int killCount = 0;
     void Update()
     {
         throwPointObject.transform.rotation = transform.rotation;
@@ -73,21 +74,33 @@ public class Player : Character
         Debug.Log("UpSize");
         transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
     }    
-
-    private void Shoot(Bot hasEnemy)
+    
+    private void Shoot(Bot Enemy)
     {
-        if (isMoving == false && amountBullet > 0 && hasEnemy == true)
+        if (isMoving == false && amountBullet > 0 && Enemy == true)
         {
-            transform.LookAt(hasEnemy.transform);
-            
-            var bullet = Instantiate(weaponPrefabs[indexOfWeapon]);
-            //var bullet2 = ObjectPoolManager.SpawnObject(weaponPrefabs[indexOfWeapon], new Vector3(0, -50, 0), throwPoint.transform.rotation);
-            bullet.transform.position = throwPoint.position;
-            bullet.transform.forward = transform.forward;
-            bullet.OnInit();            
-            killCount++;
+            transform.LookAt(Enemy.transform);
+            //var bullet = Instantiate(weaponPrefabs[indexOfWeapon]);
+            //bullet.transform.position = throwPoint.position;
+            //bullet.transform.forward = transform.forward;
+            GameObject bullet = ObjectPoolManager.instance.GetPooledObject(indexOfWeapon);
+            if(bullet != null)
+            {
+                bullet.transform.position = throwPoint.position;
+                bullet.transform.forward = transform.forward;
+                bullet.SetActive(true);
+            }    
+            //bullet.OnInit();
+
+
             amountBullet = 0;
-            Invoke("UpSize", 1f);
+            if (hitEnemy == true)
+            {
+                Debug.Log("Hit Enemy");                              
+                Invoke("UpSize", 1f);
+                hitEnemy = false;
+            }
+            
         }
     }
     public Bot DetectEnemy(Vector3 center, float radius)

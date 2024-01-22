@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Boomerang : Weapon
 {
-    public GameObject player;       
+    public GameObject player;
     public bool thrown;                                 // Check vũ khí có đang bị ném đi hoặc không
     public Transform boomerang;                         // Lấy thằng con của nó làm vũ khí để ném
     public bool rotateOnOff;                            // Check xem có đang quay không
@@ -18,13 +18,14 @@ public class Boomerang : Weapon
     public override void OnInit()
     {
         player = GameObject.Find("Player");
+        startPos = player.transform.position;
         rotateOnOff = false;                            // Không quay
         thrown = false;                                 // chưa bị ném đi
         startRotationPosition = false;                  // chưa quay trở về vị trí ban đầu
     }
     private void Update()
     {
-        startPos = player.transform.position;
+        
         // Quay đều khi true
         if(rotateOnOff == true)
         {

@@ -6,30 +6,40 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public float speed;
-    public float distance;
+    public float distance = 5f;
     public Vector3 startPos;
     public float throwSpeed;
     public float rotateSpeed = 500f;
     public Vector3 newPos;
+    
 
     public virtual void OnInit()
     {
-        
+       
     }
     public virtual void OnDespawn()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     public void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Enemy")
-        { 
+        {
+            GameObject.Find("Player").GetComponent<Player>().hitEnemy = true;
+            GameObject.Find("Player").GetComponent<Player>().killCount++;
+            //player.hitEnemy = true;
             collision.gameObject.SetActive(false);
             OnDespawn();
         }
-        else
+    }    
+    public void DestroyOutRange(Vector3 a, Vector3 b)
+    {
+        if (Vector3.Distance(a, b) >= distance)
         {
-            Invoke("OnDespawn()", 2.5f);
-        }
+            Debug.Log("Destroy Out Range");
+            Debug.Log(Vector3.Distance(a, b));
+            OnDespawn();
+        }    
     }    
 }

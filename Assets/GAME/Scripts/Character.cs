@@ -9,14 +9,14 @@ public class Character : MonoBehaviour
     [HideInInspector] public Vector3 dir;
     public int amountBullet = 0;
     [HideInInspector] public float speed = 2f;
-    [HideInInspector] public float radius = 5f;
+    [HideInInspector] public float radius = 15f;
     [HideInInspector] public string enemyLayer = "Enemy";
     [HideInInspector] public bool isMoving = false;
     [HideInInspector] public bool hasEnemy = false;
     public int hP = 1;
     public Weapon[] weaponPrefabs;
     public int indexOfWeapon = 0;
-    public int killCount = 0;
+    
 
     protected virtual void Start()
     {

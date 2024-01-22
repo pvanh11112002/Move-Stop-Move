@@ -1304,6 +1304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89e586327494af04f9383972079385b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefabs:
+  - {fileID: 2468349352156437651, guid: 77ecc7810f96ad8478d29173c8ef6017, type: 3}
+  - {fileID: 5658632718307501208, guid: ca634e3ca6323fd4dbfba92c9b5740a7, type: 3}
+  - {fileID: 114336463808211573, guid: 6e6b7565a5d2e4e459110ac2eadb21e7, type: 3}
 --- !u!4 &2044525333
 Transform:
   m_ObjectHideFlags: 0
@@ -1502,7 +1506,7 @@ Transform:
   m_GameObject: {fileID: 2145838833}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 1, z: -4.25}
+  m_LocalPosition: {x: -0.11, y: 1, z: -4.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1540,11 +1544,12 @@ MonoBehaviour:
   - {fileID: 7822296700282229304, guid: ca634e3ca6323fd4dbfba92c9b5740a7, type: 3}
   - {fileID: 7739772104448955554, guid: 6e6b7565a5d2e4e459110ac2eadb21e7, type: 3}
   indexOfWeapon: 0
-  killCount: 0
   variableJoystick: {fileID: 1131980700}
   throwPoint: {fileID: 813302709}
   throwPointObject: {fileID: 813302708}
   skin: {fileID: 781329276}
+  hitEnemy: 0
+  killCount: 0
 --- !u!1001 &327892718122361167
 PrefabInstance:
   m_ObjectHideFlags: 0

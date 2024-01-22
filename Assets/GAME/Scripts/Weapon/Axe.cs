@@ -12,13 +12,10 @@ public class Axe : Weapon
     {
         // Điều hướng di chuyển 
         transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed * Time.deltaTime);
-        //Invoke("OnDespawn()", 2.5f);
-
+        DestroyOutRange(startPos, transform.position);
     }
     public override void OnInit()
-    {
-        //Cái này cũng chưa chạy
-        newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + distance);
+    {        
         startPos = transform.position;       
     }
 }
