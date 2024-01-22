@@ -9,14 +9,19 @@ public class Character : MonoBehaviour
     [HideInInspector] public Vector3 dir;
     public int amountBullet = 0;
     [HideInInspector] public float speed = 2f;
-    [HideInInspector] public float radius = 15f;
+    public float radius = 15f;
     [HideInInspector] public string enemyLayer = "Enemy";
     [HideInInspector] public bool isMoving = false;
     [HideInInspector] public bool hasEnemy = false;
     public int hP = 1;
     public Weapon[] weaponPrefabs;
-    public int indexOfWeapon = 0;
-    
+    public int indexOfWeapon = 0; 
+    public Animator anim;
+    public static string idleAnim = "idle";
+    public static string runAnim = "run";
+    public static string attackAnim = "attack";
+    private string currentAnim;
+
 
     protected virtual void Start()
     {
@@ -49,5 +54,13 @@ public class Character : MonoBehaviour
         }
         return isCanMove;
     }
-    
+    public void ChangeAnim(string animName)
+    {
+        if (currentAnim != animName)
+        {
+            anim.ResetTrigger(animName);
+            currentAnim = animName;
+            anim.SetTrigger(currentAnim);
+        }
+    }
 }

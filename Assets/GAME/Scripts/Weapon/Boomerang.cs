@@ -25,9 +25,8 @@ public class Boomerang : Weapon
     }
     private void Update()
     {
-        
         // Quay đều khi true
-        if(rotateOnOff == true)
+        if (rotateOnOff == true)
         {
             boomerang.Rotate(0, 0, rotateSpeed * Time.deltaTime);
         }
@@ -35,7 +34,7 @@ public class Boomerang : Weapon
         if (rotateOnOff == false && startRotationPosition == false)
         {
             boomerang.transform.rotation = Quaternion.Euler(90f, 0, 0);
-            startRotationPosition = true;
+            startRotationPosition = true;//
         }
         // Throw = true thì move forward và quay đầu khi đến distance
         if (thrown == true && transform.position.z < startPos.z + distance)
@@ -48,12 +47,14 @@ public class Boomerang : Weapon
             }
         }        //Dừng quay khi thrown = false và vũ khí ở vị trí bắt đầu rồi        if (thrown == false && transform.position == startPos)
         {
+            
             rotateOnOff = false;
         }        //Khi thrown = false và vũ khí k ở vị trí bắt đầu thì đưa nó về vị trí bắt đầu        if (thrown == false && transform.position != startPos)
         {
             transform.position = Vector3.MoveTowards(transform.position, startPos,throwSpeed * Time.deltaTime);
             if (transform.position == startPos)
             {
+                OnDespawn();
                 thrown = false;
             }
         }        if (/*Input.GetKeyDown(KeyCode.Space) && */thrown == false && transform.position == startPos)
@@ -61,6 +62,9 @@ public class Boomerang : Weapon
             startRotationPosition = false;
             rotateOnOff = true;
             thrown = true;
-        }
+        }        //if (thrown == true && Vector3.Distance(transform.position, player.transform.position) < 0.01f)
+        //{
+        //    OnDespawn();
+        //}
     }
 }

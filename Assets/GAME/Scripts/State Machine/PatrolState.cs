@@ -9,7 +9,7 @@ public class PatrolState : IState<Bot>
 
     public void OnEnter(Bot t)
     {
-        //Debug.Log("Đã gọi đến OnEnter");
+        t.agent.SetDestination(t.destination);
     }
 
     public void OnExcute(Bot t)
@@ -17,7 +17,6 @@ public class PatrolState : IState<Bot>
         //Debug.Log("Đã gọi đến OnExcute");
         if (IsDestinnation == true)
         {
-
             t.destination = t.Destination();
             t.agent.SetDestination(t.destination);
         }

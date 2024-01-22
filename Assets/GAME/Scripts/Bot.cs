@@ -9,12 +9,10 @@ public class Bot : Character
     public NavMeshAgent agent;                                          
     IState<Bot> currentState;
     public Vector3 destination;
-    
-    
+
+
     public override void OnInit()
     {
-        //base.OnInit();
-        //ChangeAnim(idleAnim);       
         agent = GetComponent<NavMeshAgent>();
     }
     protected override void Start()
@@ -29,7 +27,6 @@ public class Bot : Character
         this.destination = new Vector3(UnityEngine.Random.Range(-LevelManager.Instance.rangeX, LevelManager.Instance.rangeX), 1, UnityEngine.Random.Range(-LevelManager.Instance.rangeZ, LevelManager.Instance.rangeZ));
         //agent.enabled = true;
         //agent.SetDestination(destination);
-        Debug.Log(destination);
         return destination;
     }
 
@@ -37,10 +34,10 @@ public class Bot : Character
     {
         if (currentState != null)
         {
-            if(hP <= 0)
-            {
-                Destroy(gameObject);
-            }    
+            //if(hP <= 0)
+            //{
+            //    Destroy(gameObject);
+            //}    
             currentState.OnExcute(this);
         }
     }
