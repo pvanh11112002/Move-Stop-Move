@@ -201,6 +201,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &337187836 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8542483189813718825, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
+  m_PrefabInstance: {fileID: 327892718122361167}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &383925615
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4364404106364360493, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -994,7 +999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4364404106364360493, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2163,7 +2168,8 @@ GameObject:
   - component: {fileID: 2145838837}
   - component: {fileID: 2145838834}
   - component: {fileID: 2145838840}
-  m_Layer: 0
+  - component: {fileID: 2145838841}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2260,6 +2266,7 @@ MonoBehaviour:
   speed: 2
   radius: 5
   enemyLayer: Enemy
+  playerLayer: Player
   isMoving: 0
   hasEnemy: 0
   hP: 1
@@ -2275,6 +2282,24 @@ MonoBehaviour:
   skin: {fileID: 781329276}
   hitEnemy: 0
   killCount: 0
+--- !u!114 &2145838841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145838833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07548708fca4e984291b2ad89010481d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  throwSpeed: 0
+  distance: 10
+  rotateSpeed: 500
+  startPos: {x: 0, y: 0, z: 0}
+  newPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &327892718122361167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2336,6 +2361,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6449946602068370340, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 337187836}
+    - target: {fileID: 6449946602068370340, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
@@ -2344,9 +2373,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6449946602068370340, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
+      propertyPath: botWeaponPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6449946602068370340, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
       propertyPath: weaponPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 2783887143687120856, guid: 77ecc7810f96ad8478d29173c8ef6017, type: 3}
+    - target: {fileID: 6449946602068370340, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
+      propertyPath: botWeaponPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2468349352156437651, guid: 77ecc7810f96ad8478d29173c8ef6017, type: 3}
+    - target: {fileID: 8542483189813718825, guid: 17c13345b5940e145b4006a25f51813a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 921641ac302ce0c40901793c151d96e5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

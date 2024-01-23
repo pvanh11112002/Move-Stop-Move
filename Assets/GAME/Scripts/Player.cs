@@ -49,7 +49,7 @@ public class Player : Character
         float vertical = variableJoystick.Vertical;
         if (Mathf.Abs(horizon) + Mathf.Abs(vertical) < 0.01f)
         {
-            //ChangeAnim(idleAnim);
+            ChangeAnim(idleAnim);
             isMoving = false;
             return;
         }
@@ -62,7 +62,7 @@ public class Player : Character
             {
                 isMoving = true;               
                 transform.position = CheckGround(nextPoint);
-                //ChangeAnim(runAnim);
+                ChangeAnim(runAnim);
                 amountBullet = 1;
                 hP = 1;
             }
@@ -85,15 +85,8 @@ public class Player : Character
         if (isMoving == false && amountBullet > 0 && Enemy == true)
         {
             transform.LookAt(Enemy.transform);
-            //ChangeAnim(attackAnim);
-            //Invoke(nameof(CreateBullet), 0.75f);
-            GameObject bullet = ObjectPoolManager.instance.GetPooledObject(indexOfWeapon);
-            if (bullet != null)
-            {
-                bullet.transform.position = throwPoint.position;
-                bullet.transform.forward = transform.forward;
-                bullet.SetActive(true);
-            }
+            ChangeAnim(attackAnim);
+            Invoke(nameof(CreateBullet), 0.75f);
             //bullet.OnInit();
 
 
@@ -124,7 +117,6 @@ public class Player : Character
         Collider[] hitColliders = Physics.OverlapSphere(center, radius, interactiveLayerMask);
         if (hitColliders.Length > 0)
         {
-            Debug.Log("có địk");
             return hitColliders[0].GetComponent<Bot>();
         }
         else

@@ -9,6 +9,8 @@ public class PatrolState : IState<Bot>
 
     public void OnEnter(Bot t)
     {
+        //t.amountBullet = 1;
+        t.ChangeAnim(Character.runAnim);
         t.agent.SetDestination(t.destination);
     }
 
@@ -21,6 +23,10 @@ public class PatrolState : IState<Bot>
             t.agent.SetDestination(t.destination);
         }
         IsDestinnation = Vector3.Distance(t.transform.position, t.destination) < 1f;
+        if(t.DetectPlayer(t.transform.position, t.radius) == true)
+        {
+            t.ChangeState(new AttackState());
+        }    
     }
 
     public void OnExit(Bot t)

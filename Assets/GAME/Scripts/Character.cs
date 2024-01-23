@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     [HideInInspector] public float speed = 2f;
     public float radius = 15f;
     [HideInInspector] public string enemyLayer = "Enemy";
+    [HideInInspector] public string playerLayer = "Player";
     [HideInInspector] public bool isMoving = false;
     [HideInInspector] public bool hasEnemy = false;
     public int hP = 1;

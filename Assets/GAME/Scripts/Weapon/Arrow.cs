@@ -11,13 +11,13 @@ public class Arrow : Weapon
     private void Update()
     {
         // Điều hướng di chuyển của mũi tên
+        startPos = GameObject.Find("Player").GetComponent<Player>().transform.position;
         transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed * Time.deltaTime);
         DestroyOutRange(startPos, transform.position);
     }
     public override void OnInit()
     {
-        // Chưa dùng để làm gì cả
-        startPos = transform.position;
+        
         //newPos = new Vector3(startPos.x, startPos.y, startPos.z + distance);
         
     }

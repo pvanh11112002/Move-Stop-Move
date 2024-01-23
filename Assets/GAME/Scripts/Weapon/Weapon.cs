@@ -6,11 +6,11 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public float speed;
-    public float distance = 5f;
-    public Vector3 startPos;
     public float throwSpeed;
-    public float rotateSpeed = 500f;
-    public Vector3 newPos;
+    public float distance = 5f;  
+    [SerializeField] public float rotateSpeed = 500f;
+    [SerializeField] public Vector3 startPos;
+    [SerializeField] public Vector3 newPos;
     
 
     public virtual void OnInit()

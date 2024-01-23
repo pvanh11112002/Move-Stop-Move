@@ -9,11 +9,13 @@ public class Bot : Character
     public NavMeshAgent agent;                                          
     IState<Bot> currentState;
     public Vector3 destination;
-
+    public GameObject[] botWeaponPrefabs;
 
     public override void OnInit()
     {
+        base.OnInit();
         agent = GetComponent<NavMeshAgent>();
+        ChangeAnim(idleAnim);
     }
     protected override void Start()
     {
@@ -58,5 +60,55 @@ public class Bot : Character
     internal void MoveStop()
     {
         agent.enabled = false;
+    }
+    public Player DetectPlayer(Vector3 center, float radius)
+    {
+        Debug.DrawLine(center, new Vector3(center.x + radius, center.y, center.z), Color.blue);
+        LayerMask interactiveLayerMask = LayerMask.GetMask(playerLayer);
+        Collider[] hitPlayerColliders = Physics.OverlapSphere(center, radius, interactiveLayerMask);
+        if (hitPlayerColliders.Length > 0)
+        {
+            return hitPlayerColliders[0].GetComponent<Player>();
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public void ShootPlayer(Player player)
+    {
+        //if (t.isMoving == false && t.amountBullet > 0 && Enemy == true)
+        //{
+        //    transform.LookAt(Enemy.transform);
+        //    ChangeAnim(attackAnim);
+        //    Invoke(nameof(CreateBullet), 0.75f);
+        //    //bullet.OnInit();
+
+
+        //    amountBullet = 0;
+        //    if (hitEnemy == true)
+        //    {
+        //        Debug.Log("Hit Enemy");
+        //        Invoke("UpSize", 1f);
+        //        hitEnemy = false;
+        //    }
+
+        //}
+        if(amountBullet > 0)
+        {
+            Invoke(nameof(CreateBullet), 0.75f);
+            amountBullet = 0;
+        }
+
+    }
+    public void CreateBullet(Bot t)
+    {
+        GameObject bulletOfBot = ObjectPoolManager.instance.GetPooledObject(0);
+        if (bulletOfBot != null)
+        {
+            bulletOfBot.transform.position = t.transform.position;
+            bulletOfBot.transform.forward = t.transform.forward;
+            bulletOfBot.SetActive(true);
+        }
     }
 }
