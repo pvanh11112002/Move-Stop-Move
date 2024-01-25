@@ -16,7 +16,7 @@ public class Player : Character
         throwPointObject.transform.rotation = transform.rotation;
         ChooseNextWeapon();        
         Move();
-        Shoot(DetectEnemy(transform.position, radius));
+        Shoot(DetectEnemy(transform.position, radius + 2f));
 
     }
     private int ChooseNextWeapon()
@@ -86,21 +86,21 @@ public class Player : Character
         {
             transform.LookAt(Enemy.transform);
             ChangeAnim(attackAnim);
-            Invoke(nameof(CreateBullet), 0.75f);
+            Invoke(nameof(CreateBulletForPlayer), 0.75f);
             //bullet.OnInit();
 
 
             amountBullet = 0;
             if (hitEnemy == true)
             {
-                Debug.Log("Hit Enemy");                              
+                //Debug.Log("Hit Enemy");                              
                 Invoke("UpSize", 1f);
                 hitEnemy = false;
             }
             
         }
     }
-    private void CreateBullet()
+    private void CreateBulletForPlayer()
     {
         GameObject bullet = ObjectPoolManager.instance.GetPooledObject(indexOfWeapon);
         if (bullet != null)
@@ -112,7 +112,7 @@ public class Player : Character
     }    
     public Bot DetectEnemy(Vector3 center, float radius)
     {
-        Debug.DrawLine(center, new Vector3(center.x + radius, center.y, center.z), Color.blue);
+        //Debug.DrawLine(center, new Vector3(center.x + radius, center.y, center.z), Color.blue);
         LayerMask interactiveLayerMask = LayerMask.GetMask(enemyLayer);
         Collider[] hitColliders = Physics.OverlapSphere(center, radius, interactiveLayerMask);
         if (hitColliders.Length > 0)

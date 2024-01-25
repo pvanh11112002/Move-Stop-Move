@@ -8,7 +8,10 @@ public class ObjectPoolManager : MonoBehaviour
 
     // Pool game object
     private List<GameObject> pooledObjects = new List<GameObject>();
+    private List<GameObject> pooledObjectsOfBot = new List<GameObject>();
     public GameObject[] bulletPrefabs;
+    public GameObject bulletPrefabsOfBot;
+    public int numberOfBot;
     private void Awake()
     {
         if (instance == null)
@@ -24,7 +27,13 @@ public class ObjectPoolManager : MonoBehaviour
             GameObject obj = Instantiate(bulletPrefabs[i]);
             obj.SetActive(false);
             pooledObjects.Add(obj);            
-        }                
+        } 
+        for(int j = 0; j < numberOfBot; j++)
+        {
+            GameObject objBot = Instantiate(bulletPrefabsOfBot);
+            objBot.SetActive(false);
+            pooledObjectsOfBot.Add(objBot);
+        }    
     }
     public GameObject GetPooledObject(int a)
     {
@@ -40,5 +49,31 @@ public class ObjectPoolManager : MonoBehaviour
             return pooledObjects[a];
         }
         return null;
-    }    
+    }
+    public GameObject GetPooledObjectOfBot(int a)
+    {
+        //for(int i = 0; i < pooledObjects.Count; i++)
+        //{
+        //    if (!pooledObjects[i].activeInHierarchy)
+        //    {
+        //        return pooledObjects[i];
+        //    }    
+        //}
+
+
+        //for (int i = 0; i < pooledObjectsOfBot.Count; i++)
+        //{
+        //    if (!pooledObjectsOfBot[i].activeInHierarchy)
+        //    {
+        //        return pooledObjectsOfBot[i];
+
+        //    }
+        //}
+        if (!pooledObjectsOfBot[a].activeInHierarchy)
+        {
+            return pooledObjectsOfBot[a];
+        }
+        return null;
+    }
+
 }

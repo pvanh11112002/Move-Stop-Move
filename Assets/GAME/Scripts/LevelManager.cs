@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
             return instance;
         }
     }
-    public int numberBot = 10;
+    //public int numberBot = 10;
     public GameObject botPrefabs;
     public float rangeX;
     public float rangeZ;
@@ -39,13 +39,14 @@ public class LevelManager : MonoBehaviour
     public void MakeRandomSizeToCreateBot()
     {
         List<Vector3> ListOfPos = new List<Vector3>();
-        for(int i = 0; i < numberBot; i++)
+        for(int i = 0; i < ObjectPoolManager.instance.numberOfBot; i++)
         {
             ListOfPos.Add(new Vector3(Random.Range(-LevelManager.Instance.rangeX, LevelManager.Instance.rangeX), 1, Random.Range(-LevelManager.Instance.rangeZ, LevelManager.Instance.rangeZ)));
         }
         for(int i = 0; i < ListOfPos.Count; i++)
         {
-            Instantiate(botPrefabs, ListOfPos[i], Quaternion.identity);
+            GameObject newbot = Instantiate(botPrefabs, ListOfPos[i], Quaternion.identity);
+            newbot.GetComponent<Bot>().tagNum = i;
         }    
     }
         
