@@ -11,7 +11,7 @@ public class Axe : Weapon
     private void Update()
     {
         // Điều hướng di chuyển  rìu
-        startPos = GameObject.Find("Player").GetComponent<Player>().transform.position;
+        startPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().transform.position;
         transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed * Time.deltaTime);
         DestroyOutRange(startPos, transform.position);
     }

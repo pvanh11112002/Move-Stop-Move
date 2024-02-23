@@ -47,10 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  distance: 20
-  startPos: {x: 0, y: 0, z: 0}
   throwSpeed: 100
+  distance: 20
   rotateSpeed: 500
+  startPos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!65 &6707026901511136574
 BoxCollider:
@@ -81,6 +81,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9208520235829713841}
     m_Modifications:
+    - target: {fileID: 2900948959252617129, guid: 657a5ff4fad83ed4497fdbe4a4a7a390, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ae4580bb6a8684e4e938d223e0adec38, type: 2}
     - target: {fileID: 2900948959254546793, guid: 657a5ff4fad83ed4497fdbe4a4a7a390, type: 3}
       propertyPath: m_Name
       value: axe
@@ -111,23 +115,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2900948959255041353, guid: 657a5ff4fad83ed4497fdbe4a4a7a390, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2900948959255041353, guid: 657a5ff4fad83ed4497fdbe4a4a7a390, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2900948959255041353, guid: 657a5ff4fad83ed4497fdbe4a4a7a390, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.5
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2900948959255041353, guid: 657a5ff4fad83ed4497fdbe4a4a7a390, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2900948959255041353, guid: 657a5ff4fad83ed4497fdbe4a4a7a390, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2900948959255041353, guid: 657a5ff4fad83ed4497fdbe4a4a7a390, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -167,10 +171,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  distance: 0
-  startPos: {x: 0, y: 0, z: 0}
   throwSpeed: 0
+  distance: 0
   rotateSpeed: 500
+  startPos: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
 --- !u!4 &5936927674517949232 stripped
 Transform:

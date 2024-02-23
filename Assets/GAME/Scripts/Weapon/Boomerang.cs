@@ -17,8 +17,10 @@ public class Boomerang : Weapon
     }
     public override void OnInit()
     {
-        player = GameObject.Find("Player");
-        startPos = player.transform.position;
+        //player = GameObject.Find("Player");
+        //player = GameObject.FindGameObjectsWithTag("Player");
+        player = GameObject.FindWithTag("Player");
+        startPos = player.transform.position + new Vector3(1.5f, 1.5f, 1.5f);
         rotateOnOff = false;                            // Không quay
         thrown = false;                                 // chưa bị ném đi
         startRotationPosition = false;                  // chưa quay trở về vị trí ban đầu

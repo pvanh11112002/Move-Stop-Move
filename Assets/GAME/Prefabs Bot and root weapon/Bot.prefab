@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 6182063207979999910}
   - component: {fileID: 6449946602068370340}
   - component: {fileID: 21034048737682546}
+  - component: {fileID: 7590286351800530651}
   m_Layer: 6
   m_Name: Bot
   m_TagString: Enemy
@@ -250,6 +251,7 @@ MonoBehaviour:
   agent: {fileID: 6182063207979999910}
   destination: {x: 0, y: 0, z: 0}
   throwPointOfBot: {fileID: 6765399289168491339}
+  tagNum: 0
 --- !u!136 &21034048737682546
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -273,6 +275,23 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7590286351800530651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364404106364360493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 1, g: 0, b: 0, a: 1}
+  needBoxIndicator: 1
+  needArrowIndicator: 1
+  needDistanceText: 1
+  indicator: {fileID: 0}
 --- !u!1 &6858334653182791922
 GameObject:
   m_ObjectHideFlags: 0

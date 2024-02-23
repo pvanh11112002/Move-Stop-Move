@@ -5,40 +5,52 @@ using UnityEngine;
 using UnityEngine.Pool;
 public class Player : Character
 {
+    [SerializeField] SkinnedMeshRenderer meshrRendererToUse;
+    public Material[] materialToUse;
     public FloatingJoystick variableJoystick;
     public Transform throwPoint;
     public GameObject throwPointObject;
     public GameObject skin;
     public bool hitEnemy = false;
     public int killCount = 0;
+    public GamePlay gamePlay;
+    private void Awake()
+    {
+        gamePlay = GameObject.FindGameObjectWithTag("FromGamePlay").GetComponent<GamePlay>();
+    }
+    protected override void Start()
+    {
+        killCount = PlayerPrefs.GetInt("Player Score");
+        meshrRendererToUse.material = materialToUse[gamePlay.gamePlaySkinData];
+    }
     void Update()
     {
         throwPointObject.transform.rotation = transform.rotation;
         ChooseNextWeapon();        
         Move();
         Shoot(DetectEnemy(transform.position, radius + 2f));
-
+        SaveData();
     }
     private int ChooseNextWeapon()
     {
         // Nhấn để chọn loại vũi khí cho đòn đánh tiếp theo
         // A: Arrow = Mũi tên
-        // X: Axec = Rìu
+        // X: Axe = Rìu
         // B: Boomerang
         if (Input.GetKeyDown(KeyCode.A))
         {
             indexOfWeapon = 0;
-            Debug.Log(indexOfWeapon);
+            Debug.Log("Arrow");
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             indexOfWeapon = 1;
-            Debug.Log(indexOfWeapon);
+            Debug.Log("Axe");
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
             indexOfWeapon = 2;
-            Debug.Log(indexOfWeapon);
+            Debug.Log("Boomerang");
         }
         return indexOfWeapon;
     }
@@ -102,7 +114,7 @@ public class Player : Character
     }
     private void CreateBulletForPlayer()
     {
-        GameObject bullet = ObjectPoolManager.instance.GetPooledObject(indexOfWeapon);
+        GameObject bullet = ObjectPoolManager.Instance.GetPooledObject(indexOfWeapon);
         if (bullet != null)
         {
             bullet.transform.position = throwPoint.position;
@@ -124,5 +136,12 @@ public class Player : Character
             return null;
         }
     }
-    
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt("Player Score", killCount);
+    }
+    private void GetData()
+    {
+        Debug.Log(PlayerPrefs.GetInt("Player Score"));
+    }
 }

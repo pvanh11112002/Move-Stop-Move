@@ -2,38 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolManager : MonoBehaviour
+public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
-    public static ObjectPoolManager instance;
-
     // Pool game object
+    [SerializeField] MeshRenderer weaponMeshRendererToUse;
+    public Material[] materialToUse;
     private List<GameObject> pooledObjects = new List<GameObject>();
     private List<GameObject> pooledObjectsOfBot = new List<GameObject>();
     public GameObject[] bulletPrefabs;
     public GameObject bulletPrefabsOfBot;
     public int numberOfBot;
+    public GamePlay gamePlay;
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }    
+        gamePlay = GameObject.FindGameObjectWithTag("FromGamePlay").GetComponent<GamePlay>();
     }
     private void Start()
     {
+        //if(PlayerPrefs.HasKey("HighScore"))
+        //{
+        //    Debug.Log("Có HighScore nè");
+        //}    
         // T&ạo ra và add nó vào bể
-        for(int i = 0; i < bulletPrefabs.Length; i ++)
+
+        ////Code chuẩn
+        //for (int i = 0; i < bulletPrefabs.Length; i++)
+        //{
+        //    GameObject obj = Instantiate(bulletPrefabs[i]);
+        //    obj.SetActive(false);
+        //    pooledObjects.Add(obj);
+        //}
+        for (int j = 0; j < numberOfBot; j++)
         {
-            GameObject obj = Instantiate(bulletPrefabs[i]);
-            obj.SetActive(false);
-            pooledObjects.Add(obj);            
-        } 
-        for(int j = 0; j < numberOfBot; j++)
-        {
-            GameObject objBot = Instantiate(bulletPrefabsOfBot);
+            GameObject objBot = Instantiate(bulletPrefabsOfBot);            
             objBot.SetActive(false);
             pooledObjectsOfBot.Add(objBot);
-        }    
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject obj = Instantiate(bulletPrefabs[gamePlay.gamePlayWeaponIndexData]);
+            //weaponMeshRendererToUse.material = materialToUse[gamePlay.gamePlayWeaponSkinData];
+            obj.SetActive(false);
+            pooledObjects.Add(obj);
+        }
+
     }
     public GameObject GetPooledObject(int a)
     {
@@ -52,28 +64,15 @@ public class ObjectPoolManager : MonoBehaviour
     }
     public GameObject GetPooledObjectOfBot(int a)
     {
-        //for(int i = 0; i < pooledObjects.Count; i++)
-        //{
-        //    if (!pooledObjects[i].activeInHierarchy)
-        //    {
-        //        return pooledObjects[i];
-        //    }    
-        //}
-
-
-        //for (int i = 0; i < pooledObjectsOfBot.Count; i++)
-        //{
-        //    if (!pooledObjectsOfBot[i].activeInHierarchy)
-        //    {
-        //        return pooledObjectsOfBot[i];
-
-        //    }
-        //}
         if (!pooledObjectsOfBot[a].activeInHierarchy)
         {
             return pooledObjectsOfBot[a];
         }
         return null;
     }
-
+    private void Update()
+    {
+        int score = PlayerPrefs.GetInt("Player Score", 0);
+        //Debug.Log("Score: " + score);
+    }
 }

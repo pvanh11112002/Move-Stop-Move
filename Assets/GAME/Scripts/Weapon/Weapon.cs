@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Weapon : MonoBehaviour
 {
@@ -26,16 +27,16 @@ public class Weapon : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            GameObject.Find("Player").GetComponent<Player>().hitEnemy = true;
-            GameObject.Find("Player").GetComponent<Player>().killCount++;
-            //player.hitEnemy = true;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().hitEnemy = true;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().killCount++;
             collision.gameObject.SetActive(false);
             OnDespawn();
         }
         else if(collision.CompareTag("Player"))
         {
-            Debug.Log("hit");
+
             collision.gameObject.SetActive(false);
+            
             OnDespawn();
         }    
         
@@ -44,8 +45,6 @@ public class Weapon : MonoBehaviour
     {
         if (Vector3.Distance(a, b) >= distance)
         {
-            //Debug.Log("Destroy Out Range");
-            //Debug.Log(Vector3.Distance(a, b));
             OnDespawn();
         }    
     }    
