@@ -22,6 +22,7 @@ public class Player : Character
     {
         killCount = PlayerPrefs.GetInt("Player Score");
         meshrRendererToUse.material = materialToUse[gamePlay.gamePlaySkinData];
+        AudioSource.Pl
     }
     void Update()
     {
